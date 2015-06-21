@@ -1,0 +1,23 @@
+<h1>Listing metro_stations</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @metro_stations.each do |metro_station| %>
+      <tr>
+        <td><%= link_to 'Show', metro_station %></td>
+        <td><%= link_to 'Edit', edit_metro_station_path(metro_station) %></td>
+        <td><%= link_to 'Destroy', metro_station, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Metro station', new_metro_station_path %>

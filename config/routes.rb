@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  resources :sources
+
+  resources :metro_stations
+
+  resources :flats
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

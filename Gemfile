@@ -31,6 +31,24 @@ gem 'spring',        group: :development
 
 # Use unicorn as the app server
 # gem 'unicorn'
+gem 'kaminari'
+
+
+# console gems
+gem 'awesome_print'
+gem 'pry-git'
+gem 'pry', '0.9.12.2'
+gem 'pry-rails', '0.3.2'
+gem 'pry-byebug'
+gem 'pry-doc'
+gem 'dd'
+
+group :development do
+  gem "better_errors"
+  gem 'byebug'
+end
+
+gem 'mechanize'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

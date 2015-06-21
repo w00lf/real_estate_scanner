@@ -1,0 +1,2 @@
+class Parsers::Base
+end
