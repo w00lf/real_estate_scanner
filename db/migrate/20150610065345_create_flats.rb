@@ -5,11 +5,10 @@ class CreateFlats < ActiveRecord::Migration
       t.integer :floor 
       t.integer :square 
       t.integer :price, null: false
-      t.integer :source_inner_id
       t.string :address
+      t.string :source_inner_id
 
       t.references :metro_station
-      t.references :source_inner_id
       t.references :source
       t.timestamps
     end

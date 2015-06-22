@@ -20,11 +20,10 @@ ActiveRecord::Schema.define(version: 20150610070621) do
     t.integer  "house_floors"
     t.integer  "floor"
     t.integer  "square"
-    t.integer  "price",              null: false
-    t.integer  "source_inner_id"
+    t.integer  "price",            null: false
     t.string   "address"
+    t.string   "source_inner_id"
     t.integer  "metro_station_id"
-    t.integer  "source_inner_id_id"
     t.integer  "source_id"
     t.datetime "created_at"
     t.datetime "updated_at"
