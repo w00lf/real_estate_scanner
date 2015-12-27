@@ -5,7 +5,7 @@ class FlatsController < ApplicationController
   # GET /flats.json
   def index
     respond_to do |format|
-      format.json { render json: paginate(Flat) }
+      format.json { response_json_collection(Flat, ::FlatSerializer) }
     end
   end
 

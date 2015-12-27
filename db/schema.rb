@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150610070621) do
+ActiveRecord::Schema.define(version: 20151227173048) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,13 @@ ActiveRecord::Schema.define(version: 20150610070621) do
     t.integer  "source_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "added_at"
+  end
+
+  create_table "metro_lines", force: true do |t|
+    t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "metro_stations", force: true do |t|
@@ -34,7 +41,10 @@ ActiveRecord::Schema.define(version: 20150610070621) do
     t.string   "title"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "metro_line_id"
   end
+
+  add_index "metro_stations", ["metro_line_id"], name: "index_metro_stations_on_metro_line_id", using: :btree
 
   create_table "sources", force: true do |t|
     t.string   "title"

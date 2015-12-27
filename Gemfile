@@ -33,6 +33,9 @@ gem 'spring',        group: :development
 # gem 'unicorn'
 gem 'kaminari'
 
+gem 'chewy'
+
+gem 'russian'
 
 # console gems
 gem 'awesome_print'
@@ -48,6 +51,7 @@ group :development do
 end
 
 gem 'mechanize'
+gem 'active_model_serializers'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

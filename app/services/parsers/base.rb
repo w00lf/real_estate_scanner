@@ -5,13 +5,22 @@ class Parsers::Base
     clean_text(node.text)
   end
 
-  def get_chld_cleaned_text(search_node, match, child_position)
-    node = search_node.search(match).children[child_position]
-    return unless node
-    clean_text(node.text)
+  def get_text_from_children(search_node, match)
+    text = search_node.
+            search(match).
+            children.
+            find_all {|n| 
+              n.class == Nokogiri::XML::Text 
+            }.
+            map(&:text).
+            join(" ")
+    return unless text
+    clean_text(text)
   end
 
   def clean_text(text)
-    text.gsub("\n", '').strip
+    res = text.gsub("\n", '')
+    return unless res
+    res.strip
   end
 end
