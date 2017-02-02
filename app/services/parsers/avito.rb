@@ -1,28 +1,13 @@
 class Parsers::Avito < Parsers::Base
-  URI_TO_PARSE='https://www.avito.ru/moskva/kvartiry/prodam/1-komnatnye'
+  DEFAULT_URI_TO_PARSE='https://www.avito.ru/moskva/kvartiry/prodam/1-komnatnye'
   PAGE_ATTR = 'p'
   TIMEOUT = 2
 
-  def initialize()
-    @agent = Mechanize.new
-  end
-  
-  def parse
-    Enumerator.new do |y|
-      page_number = 1
-      loop do
-        begin 
-          page = @agent.get("#{URI_TO_PARSE}?#{PAGE_ATTR}=#{page_number}")
-          
-          serialize_attributes(page).each do |entry|
-            y.yield(entry)
-          end
-          page_number += 1
-          sleep TIMEOUT
-        rescue Net::HTTPNotFound, Mechanize::ResponseCodeError => e 
-          break
-        end
-      end
+  def call(page)
+    Enumerator.new do |y|            
+      serialize_attributes(page).each do |entry|
+        y.yield(entry)
+      end                  
     end
   end
 
