@@ -1,6 +1,7 @@
 development:
   adapter: postgresql
   encoding: unicode
+  username: <%= ENV['POSTGRES_USER'] || 'postgres' %>
   url: <%= ENV['POSTGRES_URI'] || 'postgresql://localhost/real_estate_scanner' %>
 
 # Warning: The database defined as "test" will be erased and
@@ -9,4 +10,5 @@ development:
 test:
   adapter: postgresql
   encoding: unicode
+  username: <%= ENV['POSTGRES_USER'] || 'postgres' %>
   url: <%= ENV['POSTGRES_TEST_URI'] || 'postgresql://localhost/real_estate_scanner_test' %>
