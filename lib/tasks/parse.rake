@@ -1,6 +1,9 @@
 namespace :parse do
-  desc "Parse all sources and create flats"
-  task all: :environment do
-    ParseAllFlatSourcesService.call
+  desc "Test service with first parser"
+  task test: :environment do
+    require 'requester'
+    requester = Requester.new
+    parser = Parsers::Avito.new
+    ParseOffersService.new(requester: requester, parser: parser, source: Source.first).call
   end
 end

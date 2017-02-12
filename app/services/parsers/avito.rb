@@ -1,38 +1,23 @@
 class Parsers::Avito < Parsers::Base
-  URI_TO_PARSE='https://www.avito.ru/moskva/kvartiry/prodam/1-komnatnye'
+  DEFAULT_URI_TO_PARSE='https://www.avito.ru/moskva/kvartiry/prodam/1-komnatnye'
   PAGE_ATTR = 'p'
   TIMEOUT = 2
 
-  def initialize()
-    @agent = Mechanize.new
-  end
-  
-  def parse
-    Enumerator.new do |y|
-      page_number = 1
-      loop do
-        begin 
-          page = @agent.get("#{URI_TO_PARSE}?#{PAGE_ATTR}=#{page_number}")
-          
-          serialize_attributes(page).each do |entry|
-            y.yield(entry)
-          end
-          page_number += 1
-          sleep TIMEOUT
-        rescue Net::HTTPNotFound, Mechanize::ResponseCodeError => e 
-          break
-        end
-      end
+  def call(page, source)
+    Enumerator.new do |y|            
+      serialize_attributes(page, source).each do |entry|
+        y.yield(entry)
+      end                  
     end
   end
 
   private
 
-  def serialize_attributes(page)
+  def serialize_attributes(page, source)
     page.search(".catalog-list .item").map do |item|
       attrs = {}
-      flat = attrs[:flat_attributes] = {}
-      flat[:price] = parse_price(item)
+      flat = attrs[:flat_attributes] = {}      
+      
       flat[:address] = get_text_from_children(item, '.address')
       flat[:square] = parse_square(item)
       floors_data = parse_floors(item)
@@ -41,6 +26,8 @@ class Parsers::Avito < Parsers::Base
       flat[:source_inner_id] = item.attributes["id"].value
       flat[:metro_station_id] = parse_metro(item)
       flat[:added_at] = parse_added_at(item)
+
+      flat[:offers_attributes] = [{ price: parse_price(item), offer_type_id: OfferType.buy.id, source: source }]
       attrs
     end
   end
