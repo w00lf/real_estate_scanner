@@ -3,9 +3,9 @@ class Parsers::Avito < Parsers::Base
   PAGE_ATTR = 'p'
   TIMEOUT = 2
 
-  def call(page)
+  def call(page, source)
     Enumerator.new do |y|            
-      serialize_attributes(page).each do |entry|
+      serialize_attributes(page, source).each do |entry|
         y.yield(entry)
       end                  
     end
@@ -13,11 +13,11 @@ class Parsers::Avito < Parsers::Base
 
   private
 
-  def serialize_attributes(page)
+  def serialize_attributes(page, source)
     page.search(".catalog-list .item").map do |item|
       attrs = {}
-      flat = attrs[:flat_attributes] = {}
-      flat[:price] = parse_price(item)
+      flat = attrs[:flat_attributes] = {}      
+      
       flat[:address] = get_text_from_children(item, '.address')
       flat[:square] = parse_square(item)
       floors_data = parse_floors(item)
@@ -26,6 +26,8 @@ class Parsers::Avito < Parsers::Base
       flat[:source_inner_id] = item.attributes["id"].value
       flat[:metro_station_id] = parse_metro(item)
       flat[:added_at] = parse_added_at(item)
+
+      flat[:offers_attributes] = [{ price: parse_price(item), offer_type_id: OfferType.buy.id, source: source }]
       attrs
     end
   end

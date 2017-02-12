@@ -11,3 +11,8 @@ Source.create(
   url: "http://avito.ru/",
   parser: "Parsers::Avito"
 )
+
+OFFER_TYPES = %w(rent buy).freeze
+OFFER_TYPES.each do |type|
+	OfferType.create(title: type)
+end
