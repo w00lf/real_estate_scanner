@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.2.4'
+gem 'rails', '4.2.7'
 gem 'pg'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
@@ -24,6 +24,11 @@ gem 'spring',        group: :development
 gem 'kaminari'
 gem 'chewy'
 gem 'russian'
+
+# JS gems
+gem 'graphql'
+gem 'graphiql-rails'
+gem "browserify-rails"
 
 # console gems
 gem 'awesome_print'
