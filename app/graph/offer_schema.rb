@@ -1,3 +1,3 @@
 OfferSchema = GraphQL::Schema.define do
-  query QueryType
+  query OfferObjType
 end

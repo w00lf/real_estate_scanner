@@ -25,8 +25,10 @@ gem 'kaminari'
 gem 'chewy'
 gem 'russian'
 
+# JS gems
 gem 'graphql'
 gem 'graphiql-rails'
+gem "browserify-rails"
 
 # console gems
 gem 'awesome_print'
