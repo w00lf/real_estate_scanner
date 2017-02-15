@@ -1,11 +1,13 @@
 import React from 'react';
+import Relay from 'react-relay';
 import ReactDOM from 'react-dom';
-import OfferTable from 'offer_table'
+import { BoardApp, BoardRelayContainer } from 'board';
+import BoardRelayRoute from 'board_relay_route'
 
-let items = Array
-            .from(new Array(5),(val,index)=> index + 1)
-            .map((item) => ({ name: item }));
 ReactDOM.render(
-  <OfferTable items={items} />,
+  <Relay.RootContainer
+      Component={BoardRelayContainer}
+      route={new BoardRelayRoute()}
+    />,
   document.getElementById('root')
 );

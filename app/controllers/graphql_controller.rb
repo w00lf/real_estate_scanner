@@ -1,4 +1,4 @@
-class QueriesController < ApplicationController
+class GraphqlController < ApplicationController
   def new
   end
 

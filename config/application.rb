@@ -18,7 +18,7 @@ module RealEstateScanner
     # config.time_zone = 'Central Time (US & Canada)'
 
     # Configure Browserify to use babelify to compile ES6
-    config.browserify_rails.commandline_options = "-t [ babelify --presets [ es2015 react stage-0 ] --plugins [ syntax-async-functions transform-regenerator ] ]"
+    config.browserify_rails.commandline_options = "-t [ babelify --presets [ es2015 react stage-0 ] --plugins [ syntax-async-functions transform-regenerator babel_relay_plugin ] ]"
 
     # Run on all javascript files
     config.browserify_rails.force = true

@@ -2,5 +2,9 @@
 FlatType = GraphQL::ObjectType.define do
   name 'Flat'
   description 'Flat for offer'
-  field :address, types.String  
+
+  interfaces [GraphQL::Relay::Node.interface]
+  global_id_field :id
+
+  field :address, types.String
 end
