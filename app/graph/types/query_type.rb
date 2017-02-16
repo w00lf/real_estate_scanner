@@ -2,12 +2,14 @@ QueryType = GraphQL::ObjectType.define do
   name "Query"
   description "The query root of this schema"
 
-  field :offers do
-    type types[!OfferObjType]
-    argument :limit, !types.Int
-    description "Get offers"
-    resolve ->(obj, args, ctx) { Offer.limit(args["limit"]) }
-  end
+  field :source do
+    type SourceType
 
-  field :nodes, GraphQL::Relay::Node.plural_field
+    # Add an argument:
+    argument :id, !types.ID
+
+    resolve ->(obj, args, ctx) {
+      Source.find(args[:id])
+    }
+  end
 end
