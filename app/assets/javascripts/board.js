@@ -3,11 +3,19 @@ import Relay from 'react-relay';
 
 class BoardApp extends React.Component {
   render() {
-    var _name = this.props.source.title;
     return (
-      <div>
-        {_name}
-      </div>
+      <table>
+        <tbody>
+        <tr><td>{this.props.source.title}</td></tr>
+        {this.props.source.offers.edges.map((item) => 
+            ( <tr key={item.node.id}>
+                <td>{item.node.id}</td>
+                <td>{item.node.flat.address}</td>
+                <td>{item.node.price}</td>
+              </tr>)
+        )}            
+        </tbody>
+      </table>
     );
   }
 }
@@ -16,12 +24,21 @@ var BoardRelayContainer = Relay.createContainer(BoardApp, {
     source: () => Relay.QL`
       fragment on Source {
         title,
-        offers(first: 9) {
+        offers(first: 9, after: ) {
           edges {
+            cursor
             node {
               id,
-              price
-            }
+              price,
+              flat {
+                id,
+                address
+              }
+            }            
+          },
+          pageInfo {
+            hasNextPage,
+            hasPreviousPage
           }
         }
       }
