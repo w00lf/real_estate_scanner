@@ -6,10 +6,11 @@ OfferSchema = GraphQL::Schema.define do
 
   object_from_id ->(id, query_ctx) {
     type_name, item_id = GraphQL::Schema::UniqueWithinType.decode(id)
-    type_name.find(item_id)
+    type_name.constantize.find(item_id)
   }
-  resolve_type ->(obj, ctx) {
-    OfferObjType
+  resolve_type ->(obj, ctx) {    
+    return OfferObjType if obj.is_a?(OfferType)
+    "#{obj.class.to_s}Type".constantize
   }
   query QueryType
 end

@@ -16,3 +16,5 @@
 /tmp
 /node_modules
 npm-debug.log
+
+app/assets/javascripts/data/schema\.json

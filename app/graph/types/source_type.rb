@@ -5,6 +5,7 @@ SourceType = GraphQL::ObjectType.define do
 
   interfaces [GraphQL::Relay::Node.interface]
   global_id_field :id
+  
   field :title, types.String
   field :url, types.String
 

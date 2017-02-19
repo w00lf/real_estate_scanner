@@ -2,6 +2,8 @@ QueryType = GraphQL::ObjectType.define do
   name "Query"
   description "The query root of this schema"
 
+  field :node, GraphQL::Relay::Node.field
+  
   field :source do
     type SourceType
 
