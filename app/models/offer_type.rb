@@ -1,4 +1,6 @@
 class OfferType < ActiveRecord::Base
+	include ModelApiAble
+	
 	class << self
 		def rent
 			find_by(title: 'rent')
