@@ -1,4 +1,5 @@
 class Flat < ActiveRecord::Base
+	include ModelApiAble
   update_index('flats#flat') { self } 
 
 	has_many :offers

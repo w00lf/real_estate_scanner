@@ -12,7 +12,7 @@ module Types
       argument :id, !types.ID
 
       resolve ->(obj, args, ctx) {
-        ::Source.find(args[:id])
+        ::Source.find_api(args[:id])
       }
     end
   end

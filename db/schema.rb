@@ -11,10 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170212164332) do
+ActiveRecord::Schema.define(version: 20170219202329) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "uuid-ossp"
+
+  create_table "api_keys", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+    t.integer "owner_id"
+    t.string  "owner_type"
+  end
+
+  add_index "api_keys", ["owner_type", "owner_id"], name: "index_api_keys_on_owner_type_and_owner_id", using: :btree
 
   create_table "flats", force: :cascade do |t|
     t.integer  "house_floors"
