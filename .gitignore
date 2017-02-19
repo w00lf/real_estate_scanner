@@ -14,3 +14,7 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+/node_modules
+npm-debug.log
+
+app/assets/javascripts/data/schema\.json
