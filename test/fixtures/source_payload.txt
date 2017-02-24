@@ -1,0 +1,21 @@
+{
+  source(id: "%s") {
+    offers(first: 3) {
+      edges {
+            cursor
+            node {
+              id,
+              price,
+              flat {
+                id,
+                address
+              }
+            }
+          },
+          pageInfo {
+            hasNextPage,
+            hasPreviousPage
+          }
+    }
+  }
+}
