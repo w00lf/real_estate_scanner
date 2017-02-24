@@ -27,7 +27,7 @@ class Parsers::Avito < Parsers::Base
       flat[:metro_station_id] = parse_metro(item)
       flat[:added_at] = parse_added_at(item)
 
-      flat[:offers_attributes] = [{ price: parse_price(item), offer_type_id: OfferType.buy.id, source: source }]
+      attrs[:offers_attributes] = [{ price: parse_price(item), offer_type_id: OfferType.buy.id, source: source }]
       attrs
     end
   end

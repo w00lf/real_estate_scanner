@@ -11,8 +11,12 @@ class ParseOffersService
     @requester.call.each do |page|
       @parser.call(page, @source).each do |attrs|
         begin
-          flat = Flat.where(source_inner_id: attrs[:flat_attributes][:source_inner_id]).
-                      first_or_create!(attrs[:flat_attributes])
+          Flat.transaction do
+            flat = Flat.where(source_inner_id: attrs[:flat_attributes][:source_inner_id]).
+                        first_or_create!(attrs[:flat_attributes])
+            flat.offers_attributes = attrs[:offers_attributes]
+            flat.save!
+          end
         rescue => e
           @logger.error('#' * 100)
           @logger.error("Cannot create entry, reason: #{e.message}")
