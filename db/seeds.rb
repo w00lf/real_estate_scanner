@@ -16,3 +16,12 @@ OFFER_TYPES = %w(rent buy).freeze
 OFFER_TYPES.each do |type|
 	OfferType.create(title: type)
 end
+
+if Rails.env.development?
+  User.create(
+    login: 'admin',
+    name: 'admin',
+    password: '12345678',
+    password_confirmation: '12345678'
+  )
+end

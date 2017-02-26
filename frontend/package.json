@@ -7,10 +7,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "babel-node ./server.js",
-    "webpack": "webpack",
-    "dev": "webpack-dev-server"
+    "start": "babel-node ./server.js"
   },
   "repository": {
     "type": "git",
@@ -39,9 +36,14 @@
     "history": "2.1.2",
     "react": "^15.3.1",
     "react-dom": "^15.3.1",
+    "react-redux": "^4.4.5",
     "react-relay": "0.9.3",
     "react-router": "2.7.0",
-    "react-router-relay": "0.13.4",
+    "react-router-relay": "^0.13.4",
+    "redux": "^3.5.2",
+    "redux-immutable-state-invariant": "1.2.3",
+    "redux-mock-store": "1.0.2",
+    "redux-thunk": "^2.1.0",
     "todomvc-app-css": "2.0.6",
     "todomvc-common": "1.0.2",
     "webpack": "1.13.2",

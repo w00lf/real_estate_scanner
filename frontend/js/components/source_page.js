@@ -1,19 +1,24 @@
 import React from 'react';
 import Relay from 'react-relay';
 
-class BoardApp extends React.Component {
-  nextPage(e) {        
+class SourcePage extends React.Component {
+  constructor(props, context) {
+    super(props, context);
+    this.props.relay.setVariables({ id: this.props.params.id });
+  }
+
+  nextPage(e) {
     e.preventDefault()
-    let lastElem = this.props.source.offers.edges.slice(-1)[0];        
+    let lastElem = this.props.source.offers.edges.slice(-1)[0];
     if(typeof lastElem === 'undefined') {
       e.target.style.visibility = "hidden";
       return;
-    }    
-    this.props.relay.setVariables({ cursor: lastElem.cursor });    
+    }
+    this.props.relay.setVariables({ cursor: lastElem.cursor });
   }
   setPerPage(e) {
     e.preventDefault()
-    this.props.relay.setVariables({ size: e.target.value, cursor: null });     
+    this.props.relay.setVariables({ size: e.target.value, cursor: null });
   }
 
   render() {
@@ -29,13 +34,13 @@ class BoardApp extends React.Component {
         <table>
           <tbody>
           <tr><td>{this.props.source.title}</td></tr>
-          {this.props.source.offers.edges.map((item) => 
+          {this.props.source.offers.edges.map((item) =>
               ( <tr key={item.node.id}>
                   <td>{item.node.id}</td>
                   <td>{item.node.flat.address}</td>
                   <td>{item.node.price}</td>
                 </tr>)
-          )}            
+          )}
             <tr><td><a href="#" onClick={this.nextPage.bind(this)}>NextPage</a></td></tr>
           </tbody>
         </table>
@@ -43,7 +48,8 @@ class BoardApp extends React.Component {
     );
   }
 }
-var BoardRelayContainer = Relay.createContainer(BoardApp, {
+
+export default Relay.createContainer(SourcePage, {
   initialVariables: { cursor: null, size: 10 },
   fragments: {
     source: () => Relay.QL`
@@ -59,7 +65,7 @@ var BoardRelayContainer = Relay.createContainer(BoardApp, {
                 id,
                 address
               }
-            }            
+            }
           },
           pageInfo {
             hasNextPage,
@@ -70,5 +76,3 @@ var BoardRelayContainer = Relay.createContainer(BoardApp, {
     `,
   },
 });
-
-export { BoardApp, BoardRelayContainer }

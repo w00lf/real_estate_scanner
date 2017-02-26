@@ -12,7 +12,7 @@ let appServer;
 function startAppServer(callback) {
   // Serve the Relay app
   const compiler = webpack({
-    entry: path.resolve(__dirname, 'js', 'app.js'),
+    entry: path.resolve(__dirname, 'js', 'index.js'),
     module: {
       loaders: [
         {
@@ -22,7 +22,7 @@ function startAppServer(callback) {
         }
       ]
     },
-    output: {filename: '/app.js', path: '/', publicPath: '/js/'}
+    output: {filename: '/index.js', path: '/', publicPath: '/js/'}
   });
   appServer = new WebpackDevServer(compiler, {
     contentBase: '/public/',
@@ -31,7 +31,10 @@ function startAppServer(callback) {
     stats: {colors: true}
   });
   // Serve static resources
-  appServer.use('/', express.static(path.resolve(__dirname, 'public')));
+  appServer.use('/', function(req, res) {
+    res.sendFile(path.join( __dirname, './public/index.html'));
+  });
+
   appServer.listen(APP_PORT, () => {
     console.log(`App is now running on http://localhost:${APP_PORT}`);
     if (callback) {
