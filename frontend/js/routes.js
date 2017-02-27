@@ -9,6 +9,7 @@ import LogInPage from './components/log_in_page';
 
 import SourceQuery from './queries/source_query';
 import SourcesQuery from './queries/sources_query';
+import './helpers/relay_auth'
 
 export default (
   <Route path="/" component={App}>
@@ -27,11 +28,4 @@ function requireAuth(nextState, replace) {
     });
     return
   }
-  Relay.injectNetworkLayer(
-   new Relay.DefaultNetworkLayer('/graphql', {
-     headers: {
-       Authorization: 'Bearer ' + sessionStorage.jwt
-     }
-   })
-  );
 }

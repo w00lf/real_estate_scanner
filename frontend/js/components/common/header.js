@@ -23,6 +23,8 @@ class Header extends React.Component {
           <IndexLink to="/" activeClassName="active">Home</IndexLink>
           {" | "}
           <Link to="/sources" activeClassName="active">Sources</Link>
+          {" | "}
+          <a href="/logout" onClick={this.logOut}>log out</a>
         </nav>
       );
     } else {

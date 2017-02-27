@@ -3,10 +3,6 @@ import {Link} from 'react-router';
 import {connect} from 'react-redux';
 
 class HomePage extends React.Component {
-  componentDidMount() {
-    console.log('mounted!');
-  }
-
   render() {
     return (
       <div className="jumbotron">

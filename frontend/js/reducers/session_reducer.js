@@ -7,6 +7,12 @@ export default function sessionReducer(state = initialState.session, action) {
     case types.LOG_IN_SUCCESS:
       browserHistory.push('/')
       return !!sessionStorage.jwt
+    case types.LOG_IN_FAILURE:
+      alert(action.message);
+      return false
+    case types.LOG_OUT:
+      browserHistory.push('/')
+      return !!sessionStorage.jwt
     default:
       return state;
   }
