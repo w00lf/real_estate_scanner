@@ -22,7 +22,7 @@ function startAppServer(callback) {
         }
       ]
     },
-    output: {filename: '/index.js', path: '/', publicPath: '/js/'}
+    output: { filename: '/index.js', path: '/', publicPath: '/js/' }
   });
   appServer = new WebpackDevServer(compiler, {
     contentBase: '/public/',
@@ -30,16 +30,14 @@ function startAppServer(callback) {
     publicPath: '/js/',
     stats: {colors: true}
   });
+
   // Serve static resources
-  appServer.use('/', function(req, res) {
+  appServer.use('*', function(req, res) {
     res.sendFile(path.join( __dirname, './public/index.html'));
   });
 
   appServer.listen(APP_PORT, () => {
     console.log(`App is now running on http://localhost:${APP_PORT}`);
-    if (callback) {
-      callback();
-    }
   });
 }
 startAppServer();
