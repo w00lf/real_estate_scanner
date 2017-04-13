@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -11,18 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170219202329) do
+ActiveRecord::Schema.define(version: 20170224144531) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
 
-  create_table "api_keys", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+  create_table "api_keys", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.integer "owner_id"
     t.string  "owner_type"
+    t.index ["owner_type", "owner_id"], name: "index_api_keys_on_owner_type_and_owner_id", using: :btree
   end
-
-  add_index "api_keys", ["owner_type", "owner_id"], name: "index_api_keys_on_owner_type_and_owner_id", using: :btree
 
   create_table "flats", force: :cascade do |t|
     t.integer  "house_floors"
@@ -48,9 +46,8 @@ ActiveRecord::Schema.define(version: 20170219202329) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "metro_line_id"
+    t.index ["metro_line_id"], name: "index_metro_stations_on_metro_line_id", using: :btree
   end
-
-  add_index "metro_stations", ["metro_line_id"], name: "index_metro_stations_on_metro_line_id", using: :btree
 
   create_table "offer_types", force: :cascade do |t|
     t.string   "title"
@@ -65,9 +62,8 @@ ActiveRecord::Schema.define(version: 20170219202329) do
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
     t.integer  "offer_type_id"
+    t.index ["offer_type_id"], name: "index_offers_on_offer_type_id", using: :btree
   end
-
-  add_index "offers", ["offer_type_id"], name: "index_offers_on_offer_type_id", using: :btree
 
   create_table "sources", force: :cascade do |t|
     t.string   "title"
@@ -76,6 +72,15 @@ ActiveRecord::Schema.define(version: 20170219202329) do
     t.boolean  "active",     default: true
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string   "name",            null: false
+    t.string   "login",           null: false
+    t.string   "password_digest", null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["login"], name: "index_users_on_login", using: :btree
   end
 
 end

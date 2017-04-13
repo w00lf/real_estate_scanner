@@ -1,0 +1,16 @@
+{
+    "extends": [
+        "airbnb"
+    ],
+    "globals": {
+      "window": true,
+      "sessionStorage": true,
+      "Request": true,
+      "Headers": true,
+      "fetch": true,
+      "alert": true
+    },
+    "rules": {
+        "no-unused-vars": [2, { "argsIgnorePattern": "^_" }]
+    }
+}

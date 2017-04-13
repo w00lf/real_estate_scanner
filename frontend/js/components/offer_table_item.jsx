@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class OfferTableItem extends Component {
+class OfferTableItem extends React.Component {
   render() {
     return (
       <td>
