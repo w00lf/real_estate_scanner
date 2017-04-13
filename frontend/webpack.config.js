@@ -1,17 +1,16 @@
-var path = require('path');
-var webpack = require('webpack');
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
+const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
-  entry: path.resolve(__dirname, 'js', 'index.js'),
+  entry: path.resolve(__dirname, 'js', 'index.jsx'),
   module: {
     loaders: [
       {
-          exclude: /node_modules/,
-          loader: 'babel',
-          test: /\.js$/,
-      }
-    ]
+        exclude: /node_modules/,
+        loader: 'babel',
+        test: /\.jsx?$/,
+      },
+    ],
   },
   plugins: [
     new webpack.optimize.UglifyJsPlugin({
@@ -21,7 +20,7 @@ module.exports = {
       output: {
         comments: false,
       },
-    })
+    }),
   ],
-  output: { filename: 'index.js', path: path.resolve(__dirname, 'public', 'js'), publicPath: '/js/' }
+  output: { filename: 'index.js', path: path.resolve(__dirname, 'public', 'js'), publicPath: '/js/' },
 };

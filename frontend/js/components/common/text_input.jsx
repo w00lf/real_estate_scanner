@@ -1,9 +1,9 @@
-import React, {PropTypes} from 'react';
+import React from 'react';
 
-const TextInput = ({name, label, onChange, placeholder, value, error, type="text"}) => {
+const TextInput = ({ name, label, onChange, placeholder, value, error, type = 'text' }) => {
   let wrapperClass = 'form-group';
   if (error && error.length > 0) {
-    wrapperClass += " " + 'has-error';
+    wrapperClass += ' ' + 'has-error';
   }
 
   return (
@@ -16,7 +16,8 @@ const TextInput = ({name, label, onChange, placeholder, value, error, type="text
           className="form-control"
           placeholder={placeholder}
           value={value}
-          onChange={onChange}/>
+          onChange={onChange}
+        />
         {error && <div className="alert alert-danger">{error}</div>}
       </div>
     </div>
@@ -24,12 +25,12 @@ const TextInput = ({name, label, onChange, placeholder, value, error, type="text
 };
 
 TextInput.propTypes = {
-  name: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
-  placeholder: PropTypes.string,
-  value: PropTypes.string,
-  error: PropTypes.string
+  name: React.PropTypes.string.isRequired,
+  label: React.PropTypes.string.isRequired,
+  onChange: React.PropTypes.func.isRequired,
+  placeholder: React.PropTypes.string,
+  value: React.PropTypes.string,
+  error: React.PropTypes.string,
 };
 
 export default TextInput;

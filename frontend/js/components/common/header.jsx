@@ -1,12 +1,12 @@
-import React, {PropTypes} from 'react';
+import React, { PropTypes } from 'react';
 import { Link, IndexLink } from 'react-router';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import * as sessionActions from '../../actions/session_actions';
 
 
 class Header extends React.Component {
-  constructor(props) {
+  constructor(_) {
     super();
     this.logOut = this.logOut.bind(this);
   }
@@ -21,35 +21,35 @@ class Header extends React.Component {
       return (
         <nav>
           <IndexLink to="/" activeClassName="active">Home</IndexLink>
-          {" | "}
+          {' | '}
           <Link to="/sources" activeClassName="active">Sources</Link>
-          {" | "}
+          {' | '}
           <a href="/logout" onClick={this.logOut}>log out</a>
         </nav>
       );
-    } else {
-      return (
-        <nav>
-          <IndexLink to="/" activeClassName="active">Home</IndexLink>
-          {" | "}
-          <Link to="/login" activeClassName="active">log in</Link>
-        </nav>
-      );
     }
+    return (
+      <nav>
+        <IndexLink to="/" activeClassName="active">Home</IndexLink>
+        {' | '}
+        <Link to="/login" activeClassName="active">log in</Link>
+      </nav>
+    );
   }
 }
 
 Header.propTypes = {
-  actions: PropTypes.object.isRequired
-}
+  actions: PropTypes.func.isRequired,
+  logged_in: PropTypes.bool.isRequired,
+};
 
-function mapStateToProps(state, ownProps) {
-  return {logged_in: state.session};
+function mapStateToProps(state, _) {
+  return { logged_in: state.session };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(sessionActions, dispatch)
+    actions: bindActionCreators(sessionActions, dispatch),
   };
 }
 

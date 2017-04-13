@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router';
+import { Link } from 'react-router';
 import Relay from 'react-relay';
 
 class SourcesPage extends React.Component {
@@ -8,13 +8,13 @@ class SourcesPage extends React.Component {
       <div>
         <table>
           <tbody>
-          <tr><td>Sources:</td></tr>
-          {this.props.sources.sources.map((item) =>
-              ( <tr key={item.id}>
-                  <td>
-                    <Link to={'/sources/' + item.id}>{item.title}</Link>
-                  </td>
-                </tr>)
+            <tr><td>Sources:</td></tr>
+            {this.props.sources.sources.map(item =>
+              (<tr key={item.id}>
+                <td>
+                  <Link to={`/sources/${item.id}`}>{item.title}</Link>
+                </td>
+              </tr>),
           )}
           </tbody>
         </table>

@@ -1,15 +1,13 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
-import Relay from 'react-relay';
-import App from './components/app';
-import HomePage from './components/home_page';
-import SourcePage from './components/source_page';
-import SourcesPage from './components/sources_page';
-import LogInPage from './components/log_in_page';
-
+import App from './components/app.jsx';
+import HomePage from './components/home_page.jsx';
+import SourcePage from './components/source_page.jsx';
+import SourcesPage from './components/sources_page.jsx';
+import LogInPage from './components/log_in_page.jsx';
 import SourceQuery from './queries/source_query';
 import SourcesQuery from './queries/sources_query';
-import './helpers/relay_auth'
+import './helpers/relay_auth';
 
 export default (
   <Route path="/" component={App}>
@@ -24,8 +22,7 @@ function requireAuth(nextState, replace) {
   if (!sessionStorage.jwt) {
     replace({
       pathname: '/login',
-      state: { nextPathname: nextState.location.pathname }
+      state: { nextPathname: nextState.location.pathname },
     });
-    return
   }
 }

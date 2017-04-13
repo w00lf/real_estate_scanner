@@ -4,19 +4,19 @@ class Welcome extends Component {
   constructor(props) {
     super(props);
     this.state = { date: new Date(), counter: 0, currentDateDelta: 0 };
-    this.changeTime = this.changeTime.bind(this)
+    this.changeTime = this.changeTime.bind(this);
   }
 
   changeTime() {
     this.setState(prevState => ({
-      currentDateDelta: ( ( prevState.currentDateDelta + 1 ) % 11 )
-    }))
+      currentDateDelta: ((prevState.currentDateDelta + 1) % 11),
+    }));
   }
 
   componentDidMount() {
     this.timerID = setInterval(
       () => this.tick(),
-      1000
+      1000,
     );
   }
 
@@ -26,10 +26,10 @@ class Welcome extends Component {
 
   tick() {
     this.setState((prevState, props) => ({
-      date: new Date(((new Date()).getTime() + (prevState.currentDateDelta * (60 * 60 * 1000))))
+      date: new Date(((new Date()).getTime() + (prevState.currentDateDelta * (60 * 60 * 1000)))),
     }));
     this.setState((prevState, props) => ({
-      counter: prevState.counter + 1
+      counter: prevState.counter + 1,
     }));
   }
 
